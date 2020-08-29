@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { usePersistReady } from './configurePersist'
+import { onLoaded } from './loadingManager'
 
 interface Props {
   children?: React.ReactNode
@@ -7,7 +7,7 @@ interface Props {
 
 export function PersistGate(props: Props) {
   const [isReady, setIsReady] = useState(false)
-  usePersistReady(() => setIsReady(true))
+  onLoaded(() => setIsReady(true))
 
   return <React.Fragment>{isReady && props.children}</React.Fragment>
 }

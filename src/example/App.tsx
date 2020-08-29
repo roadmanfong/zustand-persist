@@ -1,10 +1,10 @@
 import React, { useState } from 'react'
 
 import './App.css'
-import useAuthStore from './useAuthStore'
-import useTodoListStore from './useTodoListStore'
-import { PersistGate } from '../lib/PersistGate'
-import { purge } from '../lib/configurePersist'
+import useAuthStore from './stores/useAuthStore'
+import useTodoListStore from './stores/useTodoListStore'
+import { PersistGate } from '../lib'
+import { purge } from './utils/persist'
 
 function App() {
   const {

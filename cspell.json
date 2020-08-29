@@ -2,5 +2,5 @@
 {
   "version": "0.1",
   "language": "en",
-  "words": ["zustand"]
+  "words": ["zustand", "denylist", "allowlist"]
 }

@@ -1,5 +1,5 @@
 import createStore from 'zustand'
-import delay from '../lib/delay'
+import delay from '../utils/delay'
 
 const useAuthStore = createStore<{
   isAuthenticated: boolean

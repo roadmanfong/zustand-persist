@@ -1,48 +1,66 @@
 import { SetState, GetState, StoreApi, StateCreator } from 'zustand'
-import { parseJson, listen, trigger, Fn } from './utils'
+import { parseJson } from './parseJson'
+import { isLoaded, register, setLoaded } from './loadingManager'
+import { setKeeper, getItem, setItem, removeRoot } from './keeper'
 
-let _storage: Storage
-const _hydratedMap: {
-  [key: string]: boolean
-} = {}
-
-export function usePersistReady(callback: Fn) {
-  listen(callback)
+interface PersistOption {
+  key: string
+  denylist?: string[]
+  allowlist?: string[]
 }
 
-async function hydrate<T>(key: string, set: SetState<T>) {
-  if (_hydratedMap[key] === false) {
-    const saveState = parseJson(await _storage.getItem(key))
-    if (saveState) {
-      set(saveState)
-    }
-    _hydratedMap[key] = true
-    if (Object.values(_hydratedMap).every(Boolean)) {
-      trigger()
+interface ConfigurePersistOption {
+  storage: Storage
+  rootKey?: string
+}
+
+export function configurePersist(option: ConfigurePersistOption) {
+  setKeeper(option.storage, option.rootKey)
+
+  async function hydrate<T>(key: string, set: SetState<T>, get: GetState<T>) {
+    if (!isLoaded(key)) {
+      const saveState = parseJson(await getItem(key))
+      if (saveState) {
+        set({
+          ...get(),
+          ...saveState,
+        })
+      }
+
+      setLoaded(key)
     }
   }
-}
 
-export function purge() {
-  Object.keys(_hydratedMap).forEach((key) => {
-    _storage.removeItem(key)
-  })
-}
-
-function makePersist(storage: Storage) {
-  _storage = storage
-  const persist = <T>(key: string, config: StateCreator<T>) => (
+  const persist = <T>(option: PersistOption, config: StateCreator<T>) => (
     set: SetState<T>,
     get: GetState<T>,
     api: StoreApi<T>
   ): T => {
-    _hydratedMap[key] = false
-    hydrate(key, set)
+    const { key, allowlist, denylist } = option
+    register(key)
+    hydrate(key, set, get)
 
     const state = config(
       async (payload) => {
         set(payload)
-        _storage.setItem(key, JSON.stringify(get()))
+        let result = get()
+
+        if (allowlist) {
+          result = Object.entries(get()).reduce((prev, [eachKey, value]) => {
+            if (allowlist.includes(eachKey)) {
+              prev[eachKey] = value
+            }
+            return prev
+          }, {} as any)
+        } else if (denylist) {
+          result = Object.entries(get()).reduce((prev, [eachKey, value]) => {
+            if (!denylist.includes(eachKey)) {
+              prev[eachKey] = value
+            }
+            return prev
+          }, {} as any)
+        }
+        setItem(key, JSON.stringify(result))
       },
       get,
       api
@@ -50,7 +68,13 @@ function makePersist(storage: Storage) {
 
     return state
   }
-  return persist
-}
 
-export default makePersist
+  async function purge() {
+    return removeRoot()
+  }
+
+  return {
+    persist,
+    purge,
+  }
+}
