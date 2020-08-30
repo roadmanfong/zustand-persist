@@ -1,12 +1,23 @@
 import { parseJson } from './parseJson'
 
+interface AnyStorage {
+  setItem: (key: string, value: string) => Promise<void> | void
+  getItem: (key: string) => Promise<string | null> | string | null
+  removeItem: (key: string) => Promise<void> | void
+}
+
 let _rootKey = 'root'
-let _storage: Storage
+let _storage: AnyStorage
 let _cached: any
 
-export function setKeeper(storage: Storage, rootKey?: string) {
-  _storage = storage
-  _rootKey = rootKey || _rootKey
+export interface KeeperOption {
+  storage: AnyStorage
+  rootKey?: string
+}
+
+export function configureKeeper(option: KeeperOption) {
+  _storage = option.storage
+  _rootKey = option?.rootKey || _rootKey
 }
 
 export async function getItem(key: string) {

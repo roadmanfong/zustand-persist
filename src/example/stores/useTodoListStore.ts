@@ -21,7 +21,10 @@ interface TodoListStore {
 
 const useTodoListStore = createStore<TodoListStore>(
   persist(
-    { key: 'todoList', denylist: ['isLoading, errorMessage', 'data'] },
+    {
+      key: 'todoList',
+      denylist: ['isLoading', 'errorMessage', 'data'],
+    },
     (set) => ({
       isLoading: false,
       errorMessage: '',

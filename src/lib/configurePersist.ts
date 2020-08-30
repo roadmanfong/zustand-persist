@@ -1,21 +1,25 @@
-import { SetState, GetState, StoreApi, StateCreator } from 'zustand'
+import { SetState, GetState, StoreApi, StateCreator, State } from 'zustand'
 import { parseJson } from './parseJson'
-import { isLoaded, register, setLoaded } from './loadingManager'
-import { setKeeper, getItem, setItem, removeRoot } from './keeper'
+import { isLoaded, register, setLoaded } from './loadRecord'
+import {
+  configureKeeper,
+  getItem,
+  setItem,
+  removeRoot,
+  KeeperOption,
+} from './keeper'
+import reconcile, { KeyList } from './reconcile'
 
-interface PersistOption {
+interface PersistOption<TState extends State> {
   key: string
-  denylist?: string[]
-  allowlist?: string[]
+  denylist?: KeyList<TState>
+  allowlist?: KeyList<TState>
 }
 
-interface ConfigurePersistOption {
-  storage: Storage
-  rootKey?: string
-}
+type ConfigurePersistOption = KeeperOption
 
 export function configurePersist(option: ConfigurePersistOption) {
-  setKeeper(option.storage, option.rootKey)
+  configureKeeper(option)
 
   async function hydrate<T>(key: string, set: SetState<T>, get: GetState<T>) {
     if (!isLoaded(key)) {
@@ -31,42 +35,27 @@ export function configurePersist(option: ConfigurePersistOption) {
     }
   }
 
-  const persist = <T>(option: PersistOption, config: StateCreator<T>) => (
-    set: SetState<T>,
-    get: GetState<T>,
-    api: StoreApi<T>
-  ): T => {
+  const persist = <TState extends State>(
+    option: PersistOption<TState>,
+    config: StateCreator<TState>
+  ) => (
+    set: SetState<TState>,
+    get: GetState<TState>,
+    api: StoreApi<TState>
+  ): TState => {
     const { key, allowlist, denylist } = option
     register(key)
     hydrate(key, set, get)
 
-    const state = config(
+    return config(
       async (payload) => {
         set(payload)
-        let result = get()
-
-        if (allowlist) {
-          result = Object.entries(get()).reduce((prev, [eachKey, value]) => {
-            if (allowlist.includes(eachKey)) {
-              prev[eachKey] = value
-            }
-            return prev
-          }, {} as any)
-        } else if (denylist) {
-          result = Object.entries(get()).reduce((prev, [eachKey, value]) => {
-            if (!denylist.includes(eachKey)) {
-              prev[eachKey] = value
-            }
-            return prev
-          }, {} as any)
-        }
-        setItem(key, JSON.stringify(result))
+        const state = reconcile(get(), allowlist, denylist)
+        setItem(key, JSON.stringify(state))
       },
       get,
       api
     )
-
-    return state
   }
 
   async function purge() {
