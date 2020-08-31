@@ -1,8 +1,37 @@
 {
-  "name": "try-zustand",
+  "name": "zustand-persist",
   "version": "0.1.0",
-  "private": true,
-  "dependencies": {
+  "description": "persist and rehydrate redux stores",
+  "main": "lib/index.js",
+  "types": "lib/index.d.ts",
+  "files": [
+    "lib"
+  ],
+  "sideEffects": false,
+  "author": "Steven Fong <waneblade@gmail.com>",
+  "contributors": [],
+  "bugs": {
+    "url": "https://github.com/roadmanfong/zustand-persit/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/roadmanfong/zustand-persit.git"
+  },
+  "license": "MIT",
+  "dependencies": {},
+  "peerDependencies": {
+    "react": ">=16.8.0",
+    "zustand": ">=3.0.0"
+  },
+  "prettier": {
+    "semi": false,
+    "trailingComma": "es5",
+    "singleQuote": true,
+    "jsxBracketSameLine": true,
+    "tabWidth": 2,
+    "printWidth": 80
+  },
+  "devDependencies": {
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.3.2",
     "@testing-library/user-event": "^7.1.2",
@@ -10,6 +39,20 @@
     "@types/node": "^12.0.0",
     "@types/react": "^16.9.0",
     "@types/react-dom": "^16.9.0",
+    "@typescript-eslint/eslint-plugin": "2.x",
+    "@typescript-eslint/parser": "2.x",
+    "babel-eslint": "10.x",
+    "cspell": "^4.1.0",
+    "eslint": "6.x",
+    "eslint-config-react-app": "^5.2.1",
+    "eslint-plugin-flowtype": "4.x",
+    "eslint-plugin-import": "2.x",
+    "eslint-plugin-jsx-a11y": "6.x",
+    "eslint-plugin-react": "7.x",
+    "eslint-plugin-react-hooks": "2.x",
+    "husky": "^4.2.5",
+    "lint-staged": ">=10",
+    "prettier": "^2.1.1",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-scripts": "3.4.3",
@@ -20,7 +63,9 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "prettier": "eslint 'src/**/*.{js,ts,tsx}' --quiet --fix && prettier --write .",
+    "lint": "tsc --project tsconfig.json --noEmit && eslint 'src/**/*.{js,ts,tsx}' && cspell 'src/**/*.{js,ts,tsx}'"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -36,5 +81,14 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "*.{js,ts,tsx}": "eslint --cache --fix",
+    "*.{js,ts,tsx,css,md}": "prettier --write"
   }
 }

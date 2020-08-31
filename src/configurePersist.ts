@@ -10,10 +10,10 @@ import {
 } from './keeper'
 import reconcile, { KeyList } from './reconcile'
 
-interface PersistOption<TState extends State> {
+interface PersistOption<S extends State> {
   key: string
-  denylist?: KeyList<TState>
-  allowlist?: KeyList<TState>
+  denylist?: KeyList<S>
+  allowlist?: KeyList<S>
 }
 
 type ConfigurePersistOption = KeeperOption
@@ -35,19 +35,15 @@ export function configurePersist(option: ConfigurePersistOption) {
     }
   }
 
-  const persist = <TState extends State>(
-    option: PersistOption<TState>,
-    config: StateCreator<TState>
-  ) => (
-    set: SetState<TState>,
-    get: GetState<TState>,
-    api: StoreApi<TState>
-  ): TState => {
+  const persist = <S extends State>(
+    option: PersistOption<S>,
+    fn: StateCreator<S>
+  ) => (set: SetState<S>, get: GetState<S>, api: StoreApi<S>): S => {
     const { key, allowlist, denylist } = option
     register(key)
     hydrate(key, set, get)
 
-    return config(
+    return fn(
       async (payload) => {
         set(payload)
         const state = reconcile(get(), allowlist, denylist)

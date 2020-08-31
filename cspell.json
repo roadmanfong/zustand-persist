@@ -2,5 +2,12 @@
 {
   "version": "0.1",
   "language": "en",
-  "words": ["zustand", "denylist", "allowlist"]
+  "words": [
+    "zustand",
+    "denylist",
+    "allowlist",
+    "fong",
+    "flowtype",
+    "browserslist"
+  ]
 }

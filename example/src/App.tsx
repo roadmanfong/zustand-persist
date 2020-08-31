@@ -3,7 +3,7 @@ import React, { useState } from 'react'
 import './App.css'
 import useAuthStore from './stores/useAuthStore'
 import useTodoListStore from './stores/useTodoListStore'
-import { PersistGate } from '../lib'
+import { PersistGate } from '../../build'
 import { purge } from './utils/persist'
 
 function App() {
@@ -21,22 +21,22 @@ function App() {
 
   return (
     <PersistGate>
-      <div className='App'>
+      <div className="App">
         {isAuthenticated ? (
-          <div className='group'>
+          <div className="group">
             <div>{user?.email}</div>
             <div>{user?.name}</div>
             <button onClick={logout}>Log out</button>
           </div>
         ) : (
-          <div className='group'>
+          <div className="group">
             <button onClick={login} disabled={isAuthenticating}>
               {isAuthenticating ? 'Logging in' : 'Log in'}
             </button>
           </div>
         )}
         <div
-          className='group'
+          className="group"
           style={{
             display: 'flex',
             flexDirection: 'row',
