@@ -7,6 +7,13 @@
   "files": [
     "lib"
   ],
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com/"
+  },
+  "keywords": [
+    "zustand",
+    "persist"
+  ],
   "sideEffects": false,
   "author": "Steven Fong <waneblade@gmail.com>",
   "contributors": [],
