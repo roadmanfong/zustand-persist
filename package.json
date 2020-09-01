@@ -1,6 +1,6 @@
 {
   "name": "zustand-persist",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "description": "persist and rehydrate redux stores",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
