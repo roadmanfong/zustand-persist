@@ -3,7 +3,7 @@ import React, { useState } from 'react'
 import './App.css'
 import useAuthStore from './stores/useAuthStore'
 import useTodoListStore from './stores/useTodoListStore'
-import { PersistGate } from '../../src'
+import { PersistGate } from '../../lib'
 import { purge } from './utils/persist'
 
 function App() {

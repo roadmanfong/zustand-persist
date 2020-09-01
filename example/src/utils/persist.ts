@@ -1,4 +1,4 @@
-import { configurePersist } from '../../../src'
+import { configurePersist } from '../../../lib'
 const { persist, purge } = configurePersist({
   storage: localStorage,
 })

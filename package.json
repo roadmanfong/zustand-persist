@@ -67,7 +67,7 @@
     "zustand": "^3.0.2"
   },
   "scripts": {
-    "build": "tsc --project",
+    "build": "tsc --project tsconfig.json",
     "prettier": "eslint 'src/**/*.{js,ts,tsx}' --quiet --fix && prettier --write .",
     "lint": "tsc --project tsconfig.json --noEmit && eslint 'src/**/*.{js,ts,tsx}' && cspell 'src/**/*.{js,ts,tsx}'"
   },
