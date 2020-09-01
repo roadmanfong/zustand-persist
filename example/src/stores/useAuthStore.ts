@@ -1,7 +1,7 @@
 import createStore from 'zustand'
-import delay from '../utils/delay'
+import persist from '../utils/persist'
 
-const useAuthStore = createStore<{
+interface AuthStore {
   isAuthenticated: boolean
   isAuthenticating: boolean
   errorMessage: string
@@ -11,27 +11,36 @@ const useAuthStore = createStore<{
   }
   login: () => void
   logout: () => void
-}>((set) => ({
-  isAuthenticated: false,
-  isAuthenticating: false,
-  errorMessage: '',
-  user: undefined,
-  login: async () => {
-    set((state) => ({ isAuthenticating: true }))
-    await delay()
-    set((state) => ({
-      isAuthenticated: true,
+}
+
+const useAuthStore = createStore<AuthStore>(
+  persist(
+    {
+      key: 'auth',
+      allowlist: ['isAuthenticated', 'user'],
+    },
+    (set) => ({
+      isAuthenticated: false,
       isAuthenticating: false,
-      user: {
-        name: 'Steven',
-        email: 'example@gmail.com',
+      errorMessage: '',
+      user: undefined,
+      login: async () => {
+        set((state) => ({ isAuthenticating: true }))
+        await new Promise((resolve) => setTimeout(resolve, 1000))
+        set((state) => ({
+          isAuthenticated: true,
+          isAuthenticating: false,
+          user: {
+            name: 'Steven',
+            email: 'example@gmail.com',
+          },
+        }))
       },
-    }))
-  },
-  logout: async () => {
-    await delay()
-    set((state) => ({ isAuthenticated: false }))
-  },
-}))
+      logout: async () => {
+        set((state) => ({ isAuthenticated: false }))
+      },
+    })
+  )
+)
 
 export default useAuthStore

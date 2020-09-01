@@ -6,13 +6,43 @@
   text-align: center;
 }
 
-button {
-  font-size: 18px;
-  max-width: 160px;
-  min-width: 40;
+.section {
+  margin-bottom: 32px;
+  width: 600px;
+  display: flex;
+  flex-direction: column;
 }
 
-.group {
-  margin-top: 32px;
-  margin-bottom: 8px;
+.auth {
+  display: flex;
+  align-items: flex-start;
+}
+
+.auth button {
+  margin-right: 16px;
+}
+
+.todo-item {
+  display: flex;
+  flex-direction: row;
+  margin-bottom: 16px;
+  border-bottom: 1px solid lightgrey;
+  padding-top: 16px;
+  padding-bottom: 16px;
+}
+
+.todo-item.new input[type='text'] {
+  padding: 8px 12px;
+  flex: 1;
+  margin-right: 8px;
+}
+
+.todo-item-text {
+  flex: 1;
+  margin-right: 8px;
+}
+
+.todo-item.completed .todo-item-text {
+  text-decoration: line-through;
+  color: grey;
 }

@@ -4,7 +4,6 @@ import './App.css'
 import useAuthStore from './stores/useAuthStore'
 import useTodoListStore from './stores/useTodoListStore'
 import { PersistGate } from '../../lib'
-import { purge } from './utils/persist'
 
 function App() {
   const {
@@ -18,84 +17,70 @@ function App() {
   const { data, create, update, remove } = useTodoListStore()
 
   const [text, setText] = useState('')
+  const onSubmit = () => {
+    create({
+      text,
+      completed: false,
+      date: new Date().toISOString(),
+    })
+    setText('')
+  }
 
   return (
     <PersistGate>
       <div className="App">
-        {isAuthenticated ? (
-          <div className="group">
-            <div>{user?.email}</div>
-            <div>{user?.name}</div>
-            <button onClick={logout}>Log out</button>
+        <div className="section">
+          <div className="auth">
+            {isAuthenticated ? (
+              <React.Fragment>
+                <button onClick={logout}>Logout</button>
+                <div>
+                  {user?.name} {user?.email}
+                </div>
+              </React.Fragment>
+            ) : (
+              <button onClick={login} disabled={isAuthenticating}>
+                {isAuthenticating ? 'loading...' : 'Login'}
+              </button>
+            )}
           </div>
-        ) : (
-          <div className="group">
-            <button onClick={login} disabled={isAuthenticating}>
-              {isAuthenticating ? 'Logging in' : 'Log in'}
-            </button>
-          </div>
-        )}
-        <div
-          className="group"
-          style={{
-            display: 'flex',
-            flexDirection: 'row',
-          }}>
-          <input
-            style={{
-              width: 200,
-              fontSize: 18,
-              padding: 24,
-              marginRight: 8,
-            }}
-            value={text}
-            onChange={(event) => setText(event.target.value)}
-          />
-          <button
-            onClick={() => {
-              setText('')
-              create({
-                text,
-                completed: false,
-                date: new Date().toISOString(),
-              })
-            }}>
-            Create
-          </button>
-          <button onClick={() => purge()}>clear all</button>
         </div>
-
-        {data.map((item, index) => (
-          <div
-            key={index}
-            style={{
-              display: 'flex',
-              flexDirection: 'row',
-              alignItems: 'center',
-              marginBottom: 4,
+        <div className="section">
+          <form
+            className="todo-item new"
+            onSubmit={(event) => {
+              event.preventDefault()
+              onSubmit()
             }}>
+            <input
+              type="text"
+              value={text}
+              onChange={(event) => setText(event.target.value)}
+            />
+            <input type="submit" />
+          </form>
+
+          {data.map((item, index) => (
             <div
-              style={{
-                width: 100,
-                marginRight: 8,
-                height: '100%',
-                fontSize: 18,
-                marginBottom: 4,
-              }}>
-              {item.text}
+              key={index}
+              className={`todo-item ${item.completed ? 'completed' : ''}`}>
+              <input
+                type="checkbox"
+                onClick={() => {
+                  update(item.id, {
+                    ...item,
+                    completed: !item.completed,
+                  })
+                }}
+                id={`checkbox-${index}`}
+              />
+              <label className="todo-item-text" htmlFor={`checkbox-${index}`}>
+                {item.text}
+              </label>
+              <button onClick={() => remove(item.id)}>Remove</button>
             </div>
-            <button onClick={() => remove(item.id)}>Remove</button>
-            <button
-              onClick={() =>
-                update(item.id, {
-                  ...item,
-                  completed: !item.completed,
-                })
-              }>
-              {item.completed ? 'Completed' : 'Undone'}
-            </button>
-          </div>
-        ))}
+          ))}
+        </div>
       </div>
     </PersistGate>
   )

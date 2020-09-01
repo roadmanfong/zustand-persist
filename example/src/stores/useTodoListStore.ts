@@ -23,7 +23,7 @@ const useTodoListStore = createStore<TodoListStore>(
   persist(
     {
       key: 'todoList',
-      denylist: ['isLoading', 'errorMessage', 'data'],
+      denylist: ['isLoading', 'errorMessage'],
     },
     (set) => ({
       isLoading: false,

@@ -1,24 +1,33 @@
-export type KeyList<T> = Array<keyof T>
+export type NonFunctionPropertyNames<T> = {
+  [K in keyof T]: T[K] extends Function ? never : K
+}[keyof T]
+
+interface ReconcileOption<T> {
+  allowlist?: NonFunctionPropertyNames<T>[]
+  denylist?: NonFunctionPropertyNames<T>[]
+}
 
 export default function reconcile<T>(
   state: T,
-  allowlist?: KeyList<T>,
-  denylist?: KeyList<T>
-): T {
+  option?: ReconcileOption<T>
+): Partial<T> {
+  const { allowlist, denylist } = option || {}
   if (allowlist) {
-    return Object.entries(state).reduce((prev, [eachKey, value]) => {
-      if (allowlist.includes(eachKey as keyof T)) {
-        prev[eachKey] = value
-      }
-      return prev
-    }, {} as any)
+    return Object.entries(state).reduce(
+      (prev, [eachKey, value]) =>
+        allowlist.includes(eachKey as NonFunctionPropertyNames<T>)
+          ? { ...prev, [eachKey]: value }
+          : prev,
+      {}
+    )
   } else if (denylist) {
-    return Object.entries(state).reduce((prev, [eachKey, value]) => {
-      if (!denylist.includes(eachKey as keyof T)) {
-        prev[eachKey] = value
-      }
-      return prev
-    }, {} as any)
+    return Object.entries(state).reduce(
+      (prev, [eachKey, value]) =>
+        !denylist.includes(eachKey as NonFunctionPropertyNames<T>)
+          ? { ...prev, [eachKey]: value }
+          : prev,
+      {}
+    )
   }
   return state
 }

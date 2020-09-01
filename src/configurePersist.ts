@@ -8,12 +8,12 @@ import {
   removeRoot,
   KeeperOption,
 } from './keeper'
-import reconcile, { KeyList } from './reconcile'
+import reconcile, { NonFunctionPropertyNames } from './reconcile'
 
 interface PersistOption<S extends State> {
   key: string
-  denylist?: KeyList<S>
-  allowlist?: KeyList<S>
+  denylist?: NonFunctionPropertyNames<S>[]
+  allowlist?: NonFunctionPropertyNames<S>[]
 }
 
 type ConfigurePersistOption = KeeperOption
@@ -46,7 +46,7 @@ export function configurePersist(option: ConfigurePersistOption) {
     return fn(
       async (payload) => {
         set(payload)
-        const state = reconcile(get(), allowlist, denylist)
+        const state = reconcile(get(), { allowlist, denylist })
         setItem(key, JSON.stringify(state))
       },
       get,
