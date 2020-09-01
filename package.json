@@ -18,11 +18,11 @@
   "author": "Steven Fong <waneblade@gmail.com>",
   "contributors": [],
   "bugs": {
-    "url": "https://github.com/roadmanfong/zustand-persit/issues"
+    "url": "https://github.com/roadmanfong/zustand-persist/issues"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/roadmanfong/zustand-persit.git"
+    "url": "https://github.com/roadmanfong/zustand-persist.git"
   },
   "license": "MIT",
   "dependencies": {},
