@@ -67,7 +67,6 @@
     "zustand": "^3.0.2"
   },
   "scripts": {
-    "eject": "react-scripts eject",
     "build": "tsc --project",
     "prettier": "eslint 'src/**/*.{js,ts,tsx}' --quiet --fix && prettier --write .",
     "lint": "tsc --project tsconfig.json --noEmit && eslint 'src/**/*.{js,ts,tsx}' && cspell 'src/**/*.{js,ts,tsx}'"

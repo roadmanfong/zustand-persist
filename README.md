@@ -4,7 +4,7 @@ inspiring by [https://github.com/rt2zz/redux-persist](redux-persit)
 
 Persist and rehydrate state
 
-Contributions Welcome
+Contributions are Welcome
 
 [![npm version](https://img.shields.io/npm/v/zustand-persist.svg?style=flat-square)](https://www.npmjs.com/package/zustand-persist) [![npm downloads](https://img.shields.io/npm/dm/zustand-persist.svg?style=flat-square)](https://www.npmjs.com/package/zustand-persist)
 
