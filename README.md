@@ -50,15 +50,12 @@ const useStore = createStore(
 
 ```tsx
 function App() {
-  function onBeforeList() {
-    console.log('onBeforeList)
-  }
-
   return (
     <PersistGate
-      onBeforeList={onBeforeList}
-      loading={(<Loading />)}
-    >
+      onBeforeList={() => {
+        console.log('onBeforeList')
+      }}
+      loading={<Loading />}>
       <AppContent />
     </PersistGate>
   )
