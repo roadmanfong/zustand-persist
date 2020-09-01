@@ -67,9 +67,11 @@
     "zustand": "^3.0.2"
   },
   "scripts": {
-    "build": "tsc --project tsconfig.json",
     "prettier": "eslint 'src/**/*.{js,ts,tsx}' --quiet --fix && prettier --write .",
-    "lint": "tsc --project tsconfig.json --noEmit && eslint 'src/**/*.{js,ts,tsx}' && cspell 'src/**/*.{js,ts,tsx}'"
+    "lint": "tsc --project tsconfig.json --noEmit && eslint 'src/**/*.{js,ts,tsx}' && cspell 'src/**/*.{js,ts,tsx}'",
+    "build": "tsc --project tsconfig.json",
+    "clean": "rimraf dist && mkdir dist",
+    "prepublish": "npm run clean && npm run build"
   },
   "eslintConfig": {
     "extends": "react-app"
