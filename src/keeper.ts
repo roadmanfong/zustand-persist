@@ -25,10 +25,15 @@ export async function getItem(key: string) {
   return draft[key]
 }
 
+let isRemovingRoot = false
+
 export async function setItem(key: string, value: string) {
   const draft = await getRoot()
   draft[key] = value
-  _storage.setItem(_rootKey, JSON.stringify(draft))
+  if (isRemovingRoot) {
+    return
+  }
+  await _storage.setItem(_rootKey, JSON.stringify(draft))
 }
 
 export async function removeItem(key: string) {
@@ -45,5 +50,7 @@ async function getRoot() {
 }
 
 export async function removeRoot() {
+  isRemovingRoot = true
   await _storage.removeItem(_rootKey)
+  isRemovingRoot = false
 }

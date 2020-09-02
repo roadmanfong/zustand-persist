@@ -13,6 +13,8 @@ $ npm install zustand-persist
 $ yarn add zustand-persist
 ```
 
+[Demo](https://codesandbox.io/s/zustand-persist-example-5u3ry?file=/src/App.js)
+
 ## Middleware
 
 ```ts

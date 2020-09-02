@@ -63,6 +63,7 @@
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-scripts": "3.4.3",
+    "rimraf": "^3.0.2",
     "typescript": "~3.7.2",
     "zustand": "^3.0.2"
   },
@@ -70,7 +71,7 @@
     "prettier": "eslint 'src/**/*.{js,ts,tsx}' --quiet --fix && prettier --write .",
     "lint": "tsc --project tsconfig.json --noEmit && eslint 'src/**/*.{js,ts,tsx}' && cspell 'src/**/*.{js,ts,tsx}'",
     "build": "tsc --project tsconfig.json",
-    "clean": "rimraf dist && mkdir dist",
+    "clean": "rimraf lib",
     "prepublish": "npm run clean && npm run build"
   },
   "eslintConfig": {

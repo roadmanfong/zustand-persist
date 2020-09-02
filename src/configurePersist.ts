@@ -47,7 +47,7 @@ export function configurePersist(option: ConfigurePersistOption) {
       async (payload) => {
         set(payload)
         const state = reconcile(get(), { allowlist, denylist })
-        setItem(key, JSON.stringify(state))
+        await setItem(key, JSON.stringify(state))
       },
       get,
       api

@@ -17,6 +17,7 @@ interface TodoListStore {
   create: (todoRequest: TodoRequest) => void
   remove: (todoId: string) => void
   update: (todoId: string, todoRequest: TodoRequest) => void
+  clear: () => void
 }
 
 const useTodoListStore = createStore<TodoListStore>(
@@ -62,6 +63,11 @@ const useTodoListStore = createStore<TodoListStore>(
                 }
               : item
           ),
+        }))
+      },
+      clear: () => {
+        set((state) => ({
+          data: [],
         }))
       },
     })

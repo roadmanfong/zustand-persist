@@ -4,6 +4,7 @@ import './App.css'
 import useAuthStore from './stores/useAuthStore'
 import useTodoListStore from './stores/useTodoListStore'
 import { PersistGate } from '../../lib'
+import { purge } from './utils/persist'
 
 function App() {
   const {
@@ -14,7 +15,7 @@ function App() {
     login,
   } = useAuthStore()
 
-  const { data, create, update, remove } = useTodoListStore()
+  const { data, create, update, remove, clear } = useTodoListStore()
 
   const [text, setText] = useState('')
   const onSubmit = () => {
@@ -44,6 +45,15 @@ function App() {
               </button>
             )}
           </div>
+        </div>
+        <div className="section">
+          <button
+            onClick={() => {
+              clear()
+              purge()
+            }}>
+            clear
+          </button>
         </div>
         <div className="section">
           <form
