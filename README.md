@@ -27,19 +27,19 @@ const { persist, purge } = configurePersist({
 const useStore = createStore(
   persist({
     key: 'auth', // required, child key of storage
-    allowlist: ['isAuthenticated', 'username'], // optional, will save everything if allowlist is undefined
+    allowlist: ['isAuthenticated', 'user'], // optional, will save everything if allowlist is undefined
     denylist: [], // optional, if allowlist set, denylist will be ignored
   }, (set) => ({
     isAuthenticating: false,
     isAuthenticated: false,
-    username: undefined,
-    setUserName: async (input) =>{
+    user: undefined,
+    login: async (username, password) =>{
       set((state) => ({ isAuthenticating: true }))
-      const { username } = await fetchUser()
+      const { user } = await webLogin(username, password)
       set((state) => ({
         isAuthenticated: true,
         isAuthenticating: false,
-        username,
+        user,
       })),
     }
   }))
