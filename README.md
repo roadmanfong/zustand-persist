@@ -1,18 +1,19 @@
 # Zustand persist
 
-inspiring by [https://github.com/rt2zz/redux-persist](redux-persit)
+inspiring by [https://github.com/rt2zz/redux-persist](https://github.com/rt2zz/redux-persist)
 
 Persist and rehydrate state works on react and react native
 
 Contributions are Welcome
-[![build status](https://travis-ci.org/roadmanfong/zustand-persist.svg?branch=master&status=unknown)] [![npm version](https://img.shields.io/npm/v/zustand-persist.svg?style=flat-square)](https://www.npmjs.com/package/zustand-persist) [![npm downloads](https://img.shields.io/npm/dm/zustand-persist.svg?style=flat-square)](https://www.npmjs.com/package/zustand-persist)
+
+[![build status](https://travis-ci.org/roadmanfong/zustand-persist.svg?branch=master&status=unknown)](https://travis-ci.org/roadmanfong/zustand-persist.svg?branch=master&status=unknown) [![npm version](https://img.shields.io/npm/v/zustand-persist.svg?style=flat-square)](https://www.npmjs.com/package/zustand-persist) [![npm downloads](https://img.shields.io/npm/dm/zustand-persist.svg?style=flat-square)](https://www.npmjs.com/package/zustand-persist)
 
 ```cli
 $ npm install zustand-persist
 $ yarn add zustand-persist
 ```
 
-[Demo](https://codesandbox.io/s/zustand-persist-example-5u3ry?file=/src/App.js)
+Try [Demo](https://codesandbox.io/s/zustand-persist-example-5u3ry?file=/src/App.js) Here
 
 ## Middleware
 
