@@ -5,8 +5,7 @@ inspiring by [https://github.com/rt2zz/redux-persist](redux-persit)
 Persist and rehydrate state works on react and react native
 
 Contributions are Welcome
-
-[![npm version](https://img.shields.io/npm/v/zustand-persist.svg?style=flat-square)](https://www.npmjs.com/package/zustand-persist) [![npm downloads](https://img.shields.io/npm/dm/zustand-persist.svg?style=flat-square)](https://www.npmjs.com/package/zustand-persist)
+[![build status](https://travis-ci.org/roadmanfong/zustand-persist.svg?branch=master&status=unknown)] [![npm version](https://img.shields.io/npm/v/zustand-persist.svg?style=flat-square)](https://www.npmjs.com/package/zustand-persist) [![npm downloads](https://img.shields.io/npm/dm/zustand-persist.svg?style=flat-square)](https://www.npmjs.com/package/zustand-persist)
 
 ```cli
 $ npm install zustand-persist
@@ -67,4 +66,3 @@ function App() {
 ## Todo
 
 - Unit test for PersistGate and configurePersist
-- CI and build status tag on README.md
