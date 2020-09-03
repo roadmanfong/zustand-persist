@@ -12303,6 +12303,11 @@ stealthy-require@^1.1.1:
   resolved "https://registry.yarnpkg.com/stealthy-require/-/stealthy-require-1.1.1.tgz#35b09875b4ff49f26a777e509b3090a3226bf24b"
   integrity sha1-NbCYdbT/SfJqd35QmzCQoyJr8ks=
 
+storage-memory@^0.0.2:
+  version "0.0.2"
+  resolved "https://registry.yarnpkg.com/storage-memory/-/storage-memory-0.0.2.tgz#6b8a2b864772773c47ef40880e3443a2373e82bd"
+  integrity sha512-AmY+vcp16MTizPuBUtsxe6pmCL0OPFKyX9PsHYdAEobxKsi3xfIqJdX2tccfXml0eosOyEz/DaEYDI/7edlj7g==
+
 stream-browserify@^2.0.1:
   version "2.0.2"
   resolved "https://registry.yarnpkg.com/stream-browserify/-/stream-browserify-2.0.2.tgz#87521d38a44aa7ee91ce1cd2a47df0cb49dd660b"

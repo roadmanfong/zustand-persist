@@ -72,6 +72,7 @@
     "react-scripts": "3.4.3",
     "rimraf": "^3.0.2",
     "rollup": "^2.26.9",
+    "storage-memory": "^0.0.2",
     "tslib": "^2.0.1",
     "typescript": "~3.7.2",
     "zustand": "^3.0.2"
@@ -82,7 +83,7 @@
     "test": "jest",
     "build": "rollup -c",
     "clean": "rimraf lib",
-    "prepublish": "npm run clean && npm run build"
+    "prepublish": "npm lint && npm run clean && npm run build"
   },
   "eslintConfig": {
     "extends": "react-app"

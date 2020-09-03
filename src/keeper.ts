@@ -8,7 +8,6 @@ interface AnyStorage {
 
 let _rootKey = 'root'
 let _storage: AnyStorage
-let _cached: any
 
 export interface KeeperOption {
   storage: AnyStorage
@@ -39,14 +38,11 @@ export async function setItem(key: string, value: string) {
 export async function removeItem(key: string) {
   const draft = await getRoot()
   delete draft[key]
+  await _storage.setItem(_rootKey, JSON.stringify(draft))
 }
 
 async function getRoot() {
-  if (_cached) {
-    return { ..._cached }
-  }
-  _cached = parseJson(await _storage.getItem(_rootKey))
-  return { ..._cached }
+  return parseJson(await _storage.getItem(_rootKey))
 }
 
 export async function removeRoot() {
