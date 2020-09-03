@@ -39,6 +39,7 @@
     "printWidth": 80
   },
   "devDependencies": {
+    "@rollup/plugin-typescript": "^5.0.2",
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.3.2",
     "@testing-library/user-event": "^7.1.2",
@@ -64,13 +65,15 @@
     "react-dom": "^16.13.1",
     "react-scripts": "3.4.3",
     "rimraf": "^3.0.2",
+    "rollup": "^2.26.9",
+    "tslib": "^2.0.1",
     "typescript": "~3.7.2",
     "zustand": "^3.0.2"
   },
   "scripts": {
     "prettier": "eslint 'src/**/*.{js,ts,tsx}' --quiet --fix && prettier --write .",
     "lint": "tsc --project tsconfig.json --noEmit && eslint 'src/**/*.{js,ts,tsx}' && cspell 'src/**/*.{js,ts,tsx}'",
-    "build": "tsc --project tsconfig.json",
+    "build": "rollup -c",
     "clean": "rimraf lib",
     "prepublish": "npm run clean && npm run build"
   },
