@@ -83,7 +83,7 @@
     "test": "jest",
     "build": "rollup -c",
     "clean": "rimraf lib",
-    "prepublish": "npm lint && npm run clean && npm run build"
+    "prepare": "npm run lint && npm run clean && npm run build"
   },
   "eslintConfig": {
     "extends": "react-app"
