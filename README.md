@@ -6,7 +6,7 @@ Persist and rehydrate state works on react and react native
 
 Contributions are Welcome
 
-[![build status](https://travis-ci.org/roadmanfong/zustand-persist.svg?branch=master&status=unknown)](https://travis-ci.org/roadmanfong/zustand-persist.svg?branch=master&status=unknown) [![npm version](https://img.shields.io/npm/v/zustand-persist.svg?style=flat-square)](https://www.npmjs.com/package/zustand-persist) [![npm downloads](https://img.shields.io/npm/dm/zustand-persist.svg?style=flat-square)](https://www.npmjs.com/package/zustand-persist)
+[![build status](https://travis-ci.org/roadmanfong/zustand-persist.svg?branch=master)](https://travis-ci.org/github/roadmanfong/zustand-persist) [![npm version](https://img.shields.io/npm/v/zustand-persist.svg?style=flat-square)](https://www.npmjs.com/package/zustand-persist) [![npm downloads](https://img.shields.io/npm/dm/zustand-persist.svg?style=flat-square)](https://www.npmjs.com/package/zustand-persist)
 
 ```cli
 $ npm install zustand-persist
