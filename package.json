@@ -39,6 +39,10 @@
     "printWidth": 80
   },
   "devDependencies": {
+    "@babel/core": "^7.11.6",
+    "@babel/preset-env": "^7.11.5",
+    "@babel/preset-react": "^7.10.4",
+    "@babel/preset-typescript": "^7.10.4",
     "@rollup/plugin-typescript": "^5.0.2",
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.3.2",
@@ -50,6 +54,7 @@
     "@typescript-eslint/eslint-plugin": "2.x",
     "@typescript-eslint/parser": "2.x",
     "babel-eslint": "10.x",
+    "babel-jest": "^26.3.0",
     "cspell": "^4.1.0",
     "eslint": "6.x",
     "eslint-config-react-app": "^5.2.1",
@@ -59,6 +64,7 @@
     "eslint-plugin-react": "7.x",
     "eslint-plugin-react-hooks": "2.x",
     "husky": "^4.2.5",
+    "jest": "^26.4.2",
     "lint-staged": ">=10",
     "prettier": "^2.1.1",
     "react": "^16.13.1",
@@ -73,6 +79,7 @@
   "scripts": {
     "prettier": "eslint 'src/**/*.{js,ts,tsx}' --quiet --fix && prettier --write .",
     "lint": "tsc --project tsconfig.json --noEmit && eslint 'src/**/*.{js,ts,tsx}' && cspell 'src/**/*.{js,ts,tsx}'",
+    "test": "jest",
     "build": "rollup -c",
     "clean": "rimraf lib",
     "prepublish": "npm run clean && npm run build"
