@@ -12,7 +12,12 @@
   },
   "keywords": [
     "zustand",
-    "persist"
+    "persist",
+    "react",
+    "state",
+    "manager",
+    "management",
+    "store"
   ],
   "sideEffects": false,
   "author": "Steven Fong <waneblade@gmail.com>",
@@ -37,6 +42,25 @@
     "jsxBracketSameLine": true,
     "tabWidth": 2,
     "printWidth": 80
+  },
+  "jest": {
+    "testPathIgnorePatterns": [
+      "/node_modules/",
+      "jest",
+      "scripts"
+    ],
+    "coverageDirectory": "./coverage/",
+    "collectCoverage": true,
+    "coverageReporters": [
+      "json",
+      "html",
+      "text",
+      "text-summary"
+    ],
+    "collectCoverageFrom": [
+      "src/**/*.{js,ts,tsx}",
+      "tests/**/*.{js,ts,tsx}"
+    ]
   },
   "devDependencies": {
     "@babel/core": "^7.11.6",
@@ -80,10 +104,10 @@
   "scripts": {
     "prettier": "eslint 'src/**/*.{js,ts,tsx}' --quiet --fix && prettier --write .",
     "lint": "tsc --project tsconfig.json --noEmit && eslint 'src/**/*.{js,ts,tsx}' && cspell 'src/**/*.{js,ts,tsx}'",
-    "test": "jest",
+    "prebuild": "rimraf lib",
     "build": "rollup -c",
-    "clean": "rimraf lib",
-    "prepare": "npm run lint && npm run clean && npm run build"
+    "prepare": "yarn build",
+    "test": "jest"
   },
   "eslintConfig": {
     "extends": "react-app"

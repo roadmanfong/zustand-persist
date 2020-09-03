@@ -63,3 +63,8 @@ function App() {
   )
 }
 ```
+
+## Todo
+
+- Unit test for PersistGate and configurePersist
+- CI and build status tag on README.md
