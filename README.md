@@ -66,4 +66,4 @@ function App() {
 
 ## Todo
 
-- Unit test for PersistGate and configurePersist
+- enhanced removing root logic

@@ -68,10 +68,9 @@
     "@babel/preset-react": "^7.10.4",
     "@babel/preset-typescript": "^7.10.4",
     "@rollup/plugin-typescript": "^5.0.2",
-    "@testing-library/jest-dom": "^4.2.4",
-    "@testing-library/react": "^9.3.2",
-    "@testing-library/user-event": "^7.1.2",
-    "@types/jest": "^24.0.0",
+    "@testing-library/jest-dom": "^5.11.4",
+    "@testing-library/react": "^11.0.2",
+    "@types/jest": "^26.0.13",
     "@types/node": "^12.0.0",
     "@types/react": "^16.9.0",
     "@types/react-dom": "^16.9.0",
@@ -89,6 +88,7 @@
     "eslint-plugin-react-hooks": "2.x",
     "husky": "^4.2.5",
     "jest": "^26.4.2",
+    "jest-environment-jsdom-sixteen": "^1.0.3",
     "lint-staged": ">=10",
     "prettier": "^2.1.1",
     "react": "^16.13.1",
@@ -98,16 +98,16 @@
     "rollup": "^2.26.9",
     "storage-memory": "^0.0.2",
     "tslib": "^2.0.1",
-    "typescript": "~3.7.2",
+    "typescript": "^4.0.2",
     "zustand": "^3.0.2"
   },
   "scripts": {
-    "prettier": "eslint 'src/**/*.{js,ts,tsx}' --quiet --fix && prettier --write .",
+    "clean": "rimraf lib",
+    "format": "eslint 'src/**/*.{js,ts,tsx}' --quiet --fix && prettier --write .",
     "lint": "tsc --project tsconfig.json --noEmit && eslint 'src/**/*.{js,ts,tsx}' && cspell 'src/**/*.{js,ts,tsx}'",
-    "prebuild": "rimraf lib",
+    "test": "jest  --env=jest-environment-jsdom-sixteen",
     "build": "rollup -c",
-    "prepare": "yarn build",
-    "test": "jest"
+    "prepublishOnly": "npm run build"
   },
   "eslintConfig": {
     "extends": "react-app"

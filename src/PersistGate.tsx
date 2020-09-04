@@ -1,17 +1,17 @@
 import React, { useState } from 'react'
-import { onAllLoaded } from './loadRecord'
+import { getLoadManager } from './LoadManager'
 
-interface Props {
+export interface PersistGateProps {
   children?: React.ReactNode
   loading?: React.ReactNode
   onBeforeLift?: () => void
 }
 
-export function PersistGate(props: Props) {
+export function PersistGate(props: PersistGateProps) {
   const { children, loading = false, onBeforeLift } = props
   const [isReady, setIsReady] = useState(false)
 
-  onAllLoaded(async () => {
+  getLoadManager().onAllLoaded(async () => {
     onBeforeLift && (await onBeforeLift())
     setIsReady(true)
   })

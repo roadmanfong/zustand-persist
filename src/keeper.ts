@@ -29,7 +29,9 @@ let isRemovingRoot = false
 export async function setItem(key: string, value: string) {
   const draft = await getRoot()
   draft[key] = value
+
   if (isRemovingRoot) {
+    console.log('setItem 3 ==============')
     return
   }
   await _storage.setItem(_rootKey, JSON.stringify(draft))
