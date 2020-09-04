@@ -78,6 +78,8 @@
     "@typescript-eslint/parser": "2.x",
     "babel-eslint": "10.x",
     "babel-jest": "^26.3.0",
+    "babel-loader": "^8.1.0",
+    "babel-plugin-named-asset-import": "^0.3.6",
     "cspell": "^4.1.0",
     "eslint": "6.x",
     "eslint-config-react-app": "^5.2.1",

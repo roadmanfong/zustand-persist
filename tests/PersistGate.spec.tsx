@@ -62,11 +62,13 @@ const Root = (props: PersistGateProps) => (
 it('should not show anything before gate lift', async () => {
   render(<Root />)
   expect(screen.queryByText('Example Title')).toBeNull()
+  await waitFor(() => screen.getByTestId('rootDiv'))
 })
 
 it('should show loading', async () => {
   render(<Root loading={<div>loading</div>} />)
   expect(screen.getByText('loading')).toBeVisible()
+  await waitFor(() => screen.getByTestId('rootDiv'))
 })
 
 it('should called onBeforeLift ', async () => {

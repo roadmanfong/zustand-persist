@@ -31,9 +31,9 @@ export async function setItem(key: string, value: string) {
   draft[key] = value
 
   if (isRemovingRoot) {
-    console.log('setItem 3 ==============')
     return
   }
+  _cachedRoot = draft
   await _storage.setItem(_rootKey, JSON.stringify(draft))
 }
 
@@ -43,12 +43,18 @@ export async function removeItem(key: string) {
   await _storage.setItem(_rootKey, JSON.stringify(draft))
 }
 
+let _cachedRoot: any = null
 async function getRoot() {
-  return parseJson(await _storage.getItem(_rootKey))
+  if (_cachedRoot) {
+    return _cachedRoot
+  }
+  _cachedRoot = parseJson(await _storage.getItem(_rootKey))
+  return _cachedRoot
 }
 
 export async function removeRoot() {
   isRemovingRoot = true
   await _storage.removeItem(_rootKey)
+  _cachedRoot = undefined
   isRemovingRoot = false
 }
