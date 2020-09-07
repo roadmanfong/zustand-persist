@@ -1,8 +1,10 @@
 # Zustand persist
 
-inspiring by [https://github.com/rt2zz/redux-persist](https://github.com/rt2zz/redux-persist)
-
 Persist and rehydrate state works on react and react native
+
+[Zustand](https://github.com/react-spring/zustand) is a small, fast and scaleable bearbones state-management solution.
+
+This library is inspiring by [https://github.com/rt2zz/redux-persist](https://github.com/rt2zz/redux-persist)
 
 Contributions are Welcome
 
