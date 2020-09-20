@@ -1,13 +1,7 @@
-import { createLoadManager, getLoadManager } from './../src/LoadManager'
-
-it('should show error when loader manager not created', () => {
-  expect(() => {
-    getLoadManager()
-  }).toThrow('LoadManager class not created')
-})
+import { getLoadManager } from './../src/LoadManager'
 
 it('isLoaded should be false', () => {
-  const loadManager = createLoadManager()
+  const loadManager = getLoadManager()
   loadManager.register('key1')
   loadManager.register('key2')
 
@@ -16,7 +10,7 @@ it('isLoaded should be false', () => {
 })
 
 it('isLoaded should be false', () => {
-  const loadManager = createLoadManager()
+  const loadManager = getLoadManager()
   loadManager.register('key1')
   loadManager.register('key2')
 
@@ -27,7 +21,7 @@ it('isLoaded should be false', () => {
 })
 
 it('isLoaded trigger all onAllLoaded', () => {
-  const loadManager = createLoadManager()
+  const loadManager = getLoadManager()
   const callback = jest.fn()
 
   loadManager.onAllLoaded(callback)
@@ -41,7 +35,7 @@ it('isLoaded trigger all onAllLoaded', () => {
 })
 
 it('isLoaded trigger all onAllLoaded second times', () => {
-  const loadManager = createLoadManager()
+  const loadManager = getLoadManager()
   const callback = jest.fn()
 
   loadManager.onAllLoaded(callback)

@@ -1,4 +1,4 @@
-import { createLoadManager } from './LoadManager'
+import { getLoadManager } from './LoadManager'
 import { SetState, GetState, StoreApi, StateCreator, State } from 'zustand'
 import { parseJson } from './parseJson'
 import {
@@ -20,7 +20,7 @@ type ConfigurePersistOption = KeeperOption
 
 export function configurePersist(option: ConfigurePersistOption) {
   configureKeeper(option)
-  const loadManager = createLoadManager()
+  const loadManager = getLoadManager()
 
   async function hydrate<T>(key: string, set: SetState<T>, get: GetState<T>) {
     if (!loadManager.isLoaded(key)) {

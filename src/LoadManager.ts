@@ -29,14 +29,9 @@ export class LoadManager {
 
 let cachedLoadManager: LoadManager | undefined
 
-export function createLoadManager() {
-  cachedLoadManager = new LoadManager()
-  return cachedLoadManager
-}
-
 export function getLoadManager() {
   if (!cachedLoadManager) {
-    throw Error('LoadManager class not created')
+    cachedLoadManager = new LoadManager()
   }
   return cachedLoadManager
 }
