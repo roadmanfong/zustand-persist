@@ -10,7 +10,7 @@ import {
 } from './keeper'
 import reconcile, { NonFunctionPropertyNames } from './reconcile'
 
-interface PersistOption<S extends State> {
+export interface PersistOption<S extends State> {
   key: string
   denylist?: NonFunctionPropertyNames<S>[]
   allowlist?: NonFunctionPropertyNames<S>[]
