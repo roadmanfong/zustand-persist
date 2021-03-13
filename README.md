@@ -56,8 +56,8 @@ const useStore = createStore(
 function App() {
   return (
     <PersistGate
-      onBeforeList={() => {
-        console.log('onBeforeList')
+      onBeforeLift={() => {
+        console.log('onBeforeLift')
       }}
       loading={<Loading />}>
       <AppContent />
