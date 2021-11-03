@@ -1,5 +1,5 @@
 import { getLoadManager } from './LoadManager'
-import { SetState, GetState, StoreApi, StateCreator, State } from 'zustand'
+import { SetState, GetState, StateCreator, State, StoreApi } from 'zustand'
 import { parseJson } from './parseJson'
 import {
   configureKeeper,
@@ -22,7 +22,11 @@ export function configurePersist(option: ConfigurePersistOption) {
   configureKeeper(option)
   const loadManager = getLoadManager()
 
-  async function hydrate<T>(key: string, set: SetState<T>, get: GetState<T>) {
+  async function hydrate<TState extends State>(
+    key: string,
+    set: SetState<TState>,
+    get: GetState<TState>
+  ) {
     if (!loadManager.isLoaded(key)) {
       const saveState = parseJson(await getItem(key))
       if (saveState) {
@@ -36,13 +40,13 @@ export function configurePersist(option: ConfigurePersistOption) {
     }
   }
 
-  const persist = <S extends State>(
-    option: PersistOption<S>,
-    fn: StateCreator<S>
-  ) => (set: SetState<S>, get: GetState<S>, api: StoreApi<S>): S => {
+  const persist = <TState extends State>(
+    option: PersistOption<TState>,
+    fn: StateCreator<TState>
+  ): StateCreator<TState> => (set, get, api) => {
     const { key, allowlist, denylist } = option
     loadManager.register(key)
-    hydrate(key, set, get)
+    hydrate<TState>(key, set, get)
 
     return fn(
       async (payload) => {

@@ -2,15 +2,15 @@ import createStore from 'zustand'
 import persist from '../utils/persist'
 
 interface AuthStore {
-  isAuthenticated: boolean
-  isAuthenticating: boolean
-  errorMessage: string
+  isAuthenticated?: boolean
+  isAuthenticating?: boolean
+  errorMessage?: string
   user?: {
     name: string
     email: string
   }
-  login: () => void
-  logout: () => void
+  login?: () => void
+  logout?: () => void
 }
 
 const useAuthStore = createStore<AuthStore>(
