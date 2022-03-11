@@ -17,6 +17,16 @@ export class LoadManager {
 
   onAllLoaded(callback: () => void) {
     this.onAllLoadedCallback = callback
+
+    // Possible this could be called with a custom callback *after*
+    // loading has finished. Which means setLoaded (below) has finished
+    // being called and the custom callback would never be run.
+    // If loading has finished, execute callback immediately.
+    // https://github.com/roadmanfong/zustand-persist/issues/4
+    // https://github.com/roadmanfong/zustand-persist/issues/9
+    if (Object.values(this.loadStatusRecord).every(Boolean)) {
+      this.onAllLoadedCallback()
+    }
   }
 
   setLoaded(key: string) {
