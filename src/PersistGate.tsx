@@ -11,16 +11,15 @@ export function PersistGate(props: PersistGateProps) {
   const { children, loading = false, onBeforeLift } = props
   const [isReady, setIsReady] = useState(false)
 
-  // Workaround for getting stuck on Loading component, as described at
+  // Only need to call this once on initial render.
   // https://github.com/roadmanfong/zustand-persist/issues/4
+  // https://github.com/roadmanfong/zustand-persist/issues/9
   useEffect(() => {
-    getLoadManager().setLoaded('')
+    getLoadManager().onAllLoaded(async () => {
+      onBeforeLift && (await onBeforeLift())
+      setIsReady(true)
+    })
   }, [])
-
-  getLoadManager().onAllLoaded(async () => {
-    onBeforeLift && (await onBeforeLift())
-    setIsReady(true)
-  })
 
   return <React.Fragment>{isReady ? children : loading}</React.Fragment>
 }
