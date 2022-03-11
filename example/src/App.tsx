@@ -28,7 +28,7 @@ function App() {
   }
 
   return (
-    <PersistGate>
+    <PersistGate loading={<div>LOADING....</div>}>
       <div className="App">
         <div className="section">
           <div className="auth">
