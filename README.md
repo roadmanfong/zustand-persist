@@ -1,3 +1,7 @@
+⚠️ This project is no longer being maintained ⚠️
+
+Zustand now has built in persistence middleware, so has persist functionality out of the box. Read more in the [Zustand readme](https://github.com/pmndrs/zustand#persist-middleware).
+
 # Zustand persist
 
 Persist and rehydrate state works on react and react native.
